@@ -1,0 +1,53 @@
+.purple-border textarea {
+    border: 1px solid #ba68c8;
+}
+.purple-border .form-control:focus {
+    border: 1px solid #ba68c8;
+    box-shadow: 0 0 0 0.2rem rgba(186, 104, 200, .25);
+}
+
+.green-border-focus .form-control:focus {
+    border: 1px solid #8bc34a;
+    box-shadow: 0 0 0 0.2rem rgba(139, 195, 74, .25);
+}
+
+#exampleFormControlTextarea4{
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 40px;
+    font-size: 13px;
+    color: black;
+}
+
+#funcbtns {
+float: right;
+}
+
+#counterbtn{
+   padding-top: 100px;
+}
+
+.navbar-brand {
+    font-weight: bold;
+    justify-self: right;
+} 
+
+#err, #warn, #cus{
+    display: inline-block;
+    width:100px;
+    height:100px;
+    margin-left: 200px;
+    margin-right:50px;  
+ }
+
+
+ .page-footer{
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+}
+
+.footer-copyright{
+    font-weight: bold;
+}
+

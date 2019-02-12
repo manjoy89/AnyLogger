@@ -1,0 +1,11 @@
+<h1 mat-dialog-title>Custom Filter</h1>
+<div mat-dialog-content>
+  <p>Type in the Filter String Below!</p>
+  <mat-form-field>
+    <input matInput [(ngModel)]="input1">
+  </mat-form-field>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">Cancel</button>
+  <button mat-button [mat-dialog-close]="input1" cdkFocusInitial>Ok</button>
+</div>

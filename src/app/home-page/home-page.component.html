@@ -1,57 +1,111 @@
-<!--Navbar-->
-<mdb-navbar SideClass="navbar navbar-expand-lg navbar-dark indigo darken-4">
-
-  <!-- Navbar brand -->
-  <mdb-navbar-brand><a class="navbar-brand" href="#" style="color:#F8B11E">AnyLogger!</a></mdb-navbar-brand>
-
-  <!-- Collapsible content -->
-  <links>
-      <!-- Links -->
-      <ul class="navbar-nav mr-auto">
-          <li class="nav-item">
-              <a class="nav-link waves-light" mdbWavesEffect style="color:#F8B11E">Home<span class="sr-only">(current)</span></a>
-          </li>
-          <li class="nav-item">
-              <a class="nav-link waves-light" mdbWavesEffect style="color:#F8B11E" routerLink="/file-explorer">File Explorer</a>
-          </li>
-          <li class="nav-item">
-              <a class="nav-link waves-light" mdbWavesEffect style="color:#F8B11E">Page3</a>
-          </li>
-          <!-- Dropdown -->
-          <li class="nav-item dropdown" dropdown>
-              <a dropdownToggle mdbWavesEffect type="button" class="nav-link dropdown-toggle waves-light" mdbWavesEffect style="color:#F8B11E">
-              Dropdown<span class="caret"></span></a>
-              <div *dropdownMenu class="dropdown-menu dropdown dropdown-primary" role="menu">
-                  <a class="dropdown-item waves-light" mdbWavesEffect href="#">Action</a>
-                  <a class="dropdown-item waves-light" mdbWavesEffect href="#">Another action</a>
-                  <a class="dropdown-item waves-light" mdbWavesEffect href="#">Something else here</a>
-                  <div class="divider dropdown-divider"></div>
-                  <a class="dropdown-item waves-light" mdbWavesEffect href="#">Separated link</a>
+<header>
+</header>
+<body class="container-fluid" class="bodyclass">
+  <div class="container-fluid nodir">
+    <div #alertnodir class="alert alert-danger alert-dismissible fade show" role="alert">
+        <button type="button" class="close" aria-label="Close" (click)="closeAlertnodir()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <strong><b>{{this.errmsg}}</b></strong>
+      </div>
+    </div>
+  <div class="container-fluid">
+  <div class="row justify-content-md-left"> 
+  <div class="col-3 fildir">
+    <!--  <mdb-badge id="pathlabel"  info="true">{{path}}</mdb-badge> -->
+    
+ <!--     <div class="upbtn">
+          <button type="button" mdbBtn color="info" mdbWavesEffect (click)="up()"><img src="./assets/images/back.png"/></button>
+      </div>
+      -->
+  <!--    <mdb-card style="overflow-y: scroll; height:400px;">
+          <div class="list-group list-group-flush">
+              <div *ngFor="let file of files" (click)="selfol(file)" class="list-group-item pointer">
+                      <div>
+                        <img [hidden]="imgflag" [src]="file.IsDirectory==true ? './assets/images/folder.png' : './assets/images/file.png'"/>
+                        {{file.Name}}
+                      </div>
               </div>
-          </li>
-      </ul>
-      <!-- Links -->
-      <form class="form-inline waves-light" mdbWavesEffect>
-        <div class="md-form my-0">
-          <mdb-navbar-brand><a class="navbar-brand" id="brandid" href="#" style="color:#F8B11E">Genuine Parts Company - NAPA - RPM</a></mdb-navbar-brand>
+            </div>
+      </mdb-card>
+  -->
+  <table mdbTable mdbTableScroll  maxHeight="500" bordered="true"  striped="true"  hover="true"  small="true" class="table-scroll">
+      <thead class="black white-text">
+          <tr>
+            <th scope="col">
+                <button class="upbtn" (click)="up()"><img src="./assets/images/back.png"/></button>
+                <input type="text" [(ngModel)]="this.path" (keydown)="onKeydown($event)" class="pathtext"> 
+        <!--        {{(path.length>35)? (path | slice:0:35)+'...':(path)}}  -->
+            </th>
+          </tr>
+        </thead>
+      <tbody>
+        <tr *ngFor="let file of files" (click)="selfol(file)" class="pointer">
+          <td>
+            <img [hidden]="imgflag" [src]="file.IsDirectory==true ? './assets/images/folder.png' : './assets/images/file.png'"/>
+            {{file.Name}}
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <div #alert class="alert alert-success alert-dismissible fade show" role="alert">
+        <button type="button" class="close" aria-label="Close" (click)="closeAlert()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <strong>File <b>{{logfile}}</b> added to the Logger!</strong>
+      </div>
+      <div #alertfail class="alert alert-danger alert-dismissible fade show" role="alert">
+          <button type="button" class="close" aria-label="Close" (click)="closeAlertfail()">
+            <span aria-hidden="true">&times;</span>
+          </button>
+          <strong>Your Log seems to have failures or vulnerabilities!</strong>
         </div>
-    </form>
-  </links>
-  <!-- Collapsible content -->
-
-</mdb-navbar>
-<body>
-  <div class="container">
-  <div class="form-group purple-border">
-    <textarea class="form-control" id="exampleFormControlTextarea4" rows="25">{{Content}}</textarea>
+        <div #alertwarn class="alert alert-warning alert-dismissible fade show" role="alert">
+            <button type="button" class="close" aria-label="Close" (click)="closeAlertwarn()">
+              <span aria-hidden="true">&times;</span>
+            </button>
+            <strong>Your Log seems to have noticable Warnings!</strong>
+          </div>
   </div>
+  <div class="col-8"> 
+  <div class="form-group purple-border" #content>
+    <textarea class="form-control" id="exampleFormControlTextarea4" rows="26" placeholder="Your Logs Flow Here!" readonly>{{Content}}</textarea>
+  </div>
+  <div  id="funcbtns" >
+      <!-- <button type="button" mdbBtn color="primary" mdbTooltip="Upload Any Log file to Watch" placement="top" mdbWavesEffect>Upload Log File</button> -->
+       <button type="button" mdbBtn color="danger" mdbTooltip="Clears the Logs & Resets all the counters" placement="top" mdbWavesEffect (click)="basicModal.show()">Clear Log</button>
+       <button type="button" mdbBtn color="primary" mdbTooltip="Set a Custom String for its Count" placement="top" mdbWavesEffect (click)="cusfilfun()">Custom Filter</button>
+   </div>
+     <!--Counter Components-->
+     <div  id="counterbtn">
+       <div id="err" class="container-fluid">
+         <div>
+           <h4><mdb-badge color="red">Errors</mdb-badge></h4>
+         </div>
+         <div>
+           <ngx-counter size="medium" theme="red" [(ngModel)]="ErrCount" limit=0>></ngx-counter>
+         </div>
+       </div>
+       <div id="warn" class="container-fluid">
+           <div>
+             <h4><mdb-badge color="orange">Warnings</mdb-badge></h4>
+           </div>
+           <div>
+             <ngx-counter size="medium" theme="gold" bgcolor="#F5F5DC" [(ngModel)]="WarnCount" limit=0></ngx-counter>
+           </div>
+       </div>
+       <div id="cus" class="container-fluid">
+           <div>
+             <h4><mdb-badge color="blue">{{Custom}}</mdb-badge></h4>
+           </div>
+           <div>
+             <ngx-counter size="medium" theme="blue" [(ngModel)]="CustCount" limit=0></ngx-counter>
+           </div>
+       </div>
+     </div>
 </div>
-<div class="container" id="funcbtns" >
-      <button type="button" mdbBtn color="primary" mdbTooltip="Upload Any Log file to Watch" placement="top" mdbWavesEffect>Upload Log File</button>
-      <button type="button" mdbBtn color="danger" mdbTooltip="Clears the Logs & Resets all the counters" placement="top" mdbWavesEffect (click)="basicModal.show()">Clear Log</button>
-      <button type="button" mdbBtn color="success" mdbTooltip="Set a Custom String for its Count" placement="top" mdbWavesEffect>Custom Filter</button>
 </div>
-
+</div>
 <!--Modal-Clear-Log-->
 <div mdbModal #basicModal="mdbModal" class="modal fade top" tabindex="-1" role="dialog" aria-labelledby="myBasicModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-notify modal-danger" role="document">
@@ -66,52 +120,25 @@
         All Logs Will be cleared and the Filers will be Reset!
       </div>
       <div class="modal-footer">
+        <button type="button" mdbBtn color="primary" class="relative waves-light" mdbWavesEffect (click)="clearlog()" (click)="basicModal.hide()">Yes</button>
         <button type="button" mdbBtn color="secondary" class="waves-light" aria-label="Close" (click)="basicModal.hide()" mdbWavesEffect>Cancel</button>
-        <button type="button" mdbBtn color="primary" class="relative waves-light" mdbWavesEffect (click)="clearlog()">Yes</button>
       </div>
     </div>
   </div>
 </div>
 <!--Modal-Clear-Log-->
   <!--Counter Components-->
-  <div class="container" id="counterbtn">
-    <div id="err">
-      <div>
-        <h4><mdb-badge color="red">Errors</mdb-badge></h4>
-      </div>
-      <div>
-        <ngx-counter size="medium" theme="red" [(ngModel)]="ErrCount" limit=0>></ngx-counter>
-      </div>
-    </div>
-    <div id="warn">
-        <div>
-          <h4><mdb-badge color="orange">Warnings</mdb-badge></h4>
-        </div>
-        <div>
-          <ngx-counter size="medium" theme="gold" bgcolor="#F5F5DC" [(ngModel)]="WarnCount" limit=0></ngx-counter>
-        </div>
-    </div>
-    <div id="cus">
-        <div>
-          <h4><mdb-badge color="blue">{{Custom}}</mdb-badge></h4>
-        </div>
-        <div>
-          <ngx-counter size="medium" theme="blue" [(ngModel)]="CustCount" limit=0></ngx-counter>
-        </div>
-    </div>
-  </div>
-  <!--Counter Components-->
 </body>
-<!-- Footer -->
 
-<footer class="page-footer font-small indigo darken-4">
-  <!-- Copyright -->
+<!-- Footer 
+  <footer class="page-footer font-small indigo darken-4">
+ 
   <div class="footer-copyright text-center py-3" style="color:#F8B11E">© 2019 Copyright : 
     <a href="https://mdbootstrap.com/education/angular/" style="color:#F8B11E"> GPC - NAPA - RPM - AnyLogger!</a>
   </div>
-  <!-- Copyright -->
+  
 
-</footer>
-
+</footer> 
+-->
 <!-- Footer -->
 

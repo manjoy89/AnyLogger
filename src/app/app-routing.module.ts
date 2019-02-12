@@ -1,9 +1,11 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { FileExplorerComponent } from './file-explorer/file-explorer.component';
+import { HomePageComponent } from './home-page/home-page.component';
+
 
 const routes: Routes = [
-  { path: 'file-explorer', component: FileExplorerComponent }
+  { path: '', component: HomePageComponent }
+ 
 ];
 
 @NgModule({

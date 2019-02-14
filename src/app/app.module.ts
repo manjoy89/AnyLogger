@@ -12,6 +12,9 @@ import { FormsModule } from '@angular/forms';
 import { NavComponent } from './nav/nav.component';
 import { DialogbodyComponent } from './dialogbody/dialogbody.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { ToastrModule } from 'ngx-toastr';
+import { EnvironmentlistComponent } from './environmentlist/environmentlist.component';
+import { UiSwitchModule } from 'ngx-toggle-switch';
 
 
 
@@ -21,7 +24,8 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
     AppComponent,
     HomePageComponent,
     NavComponent,
-    DialogbodyComponent
+    DialogbodyComponent,
+    EnvironmentlistComponent
   ],
   imports: [
     BrowserModule,
@@ -33,7 +37,13 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
     MatButtonModule,
     MatInputModule,
     BrowserAnimationsModule,
-    MatDialogModule
+    MatDialogModule,
+    ToastrModule.forRoot({
+      timeOut: 10000,
+      positionClass: 'toast-top-left',
+      preventDuplicates: true,
+    }),
+    UiSwitchModule
   ],
   schemas: [NO_ERRORS_SCHEMA],
   providers: [{

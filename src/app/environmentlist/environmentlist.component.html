@@ -1,0 +1,42 @@
+<header>
+  <div class="container-fluid">
+  <h1>RPM Environment List</h1>
+</div>
+</header>
+<body>
+<div class="container-fluid" class="envs">
+    
+<mdb-card *ngFor="let item of this.items[0].CIQ2" class="envs">
+    <h2>{{item.env}}</h2>
+    <hr class="hrclass">
+    <mdb-card-body>
+      <mdb-card-title >
+        <strong>NAME:</strong> {{item.name}}<br>
+        <strong>IP:</strong> {{item.ip}}<br>
+        <strong>ENV:</strong> {{item.env}}<br>
+        <strong>LAST UPDATED:</strong> {{item.lastUpdated}}
+      </mdb-card-title>
+      <hr>
+      <table mdbTable mdbTableScroll  maxHeight="500" bordered="true"  striped="true"  hover="true"  small="true" class="table-scroll">
+          <caption>Showing {{item.rpms.length}} Items</caption>
+          <thead align="center">
+              <tr>
+                <th scope="col">NAME</th>
+                <th scope="col">VERSION</th>
+                <th scope="col">RELEASE</th>
+                <th scope="col">INSTALLED</th>
+              </tr>
+            </thead>
+          <tbody align="center">
+            <tr *ngFor="let rpms of item.rpms">
+              <td>{{rpms.name}}</td>
+              <td>{{rpms.version}}</td>
+              <td>{{rpms.release}}</td>
+              <td>{{rpms.date}}</td>
+            </tr>
+          </tbody>
+        </table>
+    </mdb-card-body>
+  </mdb-card>
+</div>
+</body>

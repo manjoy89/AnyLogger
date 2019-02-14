@@ -3,6 +3,7 @@ header {
 
     .logo {
         font-weight: bold;
+        font-size: 20px;
     }
 
     nav {
@@ -16,9 +17,8 @@ header {
                 float: left;
 
                 a {
-                    padding: 1.5em;
-                    text-transform: uppercase;
-                    font-size: .8em;
+                    padding: 1em;
+                    font-size: 16px;
 
                     &:hover {
                         background: #362F5C;
@@ -32,7 +32,7 @@ header {
 .container {
     width: 80%;
     margin: 0 auto;
-    padding: 1.3em;
+    padding: 1em;
     display: grid;
     grid-template-columns: 30% auto;
 
@@ -42,5 +42,6 @@ header {
 
     .gpc{
         font-weight: bold;
+        font-size: 22px;
     }
 }

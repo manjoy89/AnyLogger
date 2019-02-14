@@ -1,7 +1,8 @@
-import { Component, OnInit,ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit,ViewChild, ElementRef, ViewEncapsulation } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { MatDialog, MatDialogConfig, MatDialogRef } from "@angular/material/dialog";
 import { DialogbodyComponent } from '../dialogbody/dialogbody.component';
+import { ToastrService } from 'ngx-toastr';
 
 
 
@@ -11,6 +12,9 @@ import { DialogbodyComponent } from '../dialogbody/dialogbody.component';
   styleUrls: ['./home-page.component.scss']
 })
 export class HomePageComponent implements OnInit {
+  
+  
+ 
 
   @ViewChild('alert') alert: ElementRef;
   @ViewChild('alertfail') alertfail: ElementRef;
@@ -18,7 +22,7 @@ export class HomePageComponent implements OnInit {
   @ViewChild('alertnodir') alertnodir: ElementRef;
  
 
-  Content:String;
+  Content:string;
   Staging:String;
   file:any;
   ErrFlag:boolean = false;
@@ -40,11 +44,15 @@ export class HomePageComponent implements OnInit {
   concatpath:any;
   scrollflag:boolean = true;
   errmsg:any;
-  
+  enableerr:boolean = false;
+  enablewarn:boolean = false;
+  enablecust:boolean = false;
 
-  constructor(private http: HttpClient,private dialog: MatDialog, public dialogRef: MatDialogRef<DialogbodyComponent>) { 
+  constructor(private http: HttpClient,private dialog: MatDialog, public dialogRef: MatDialogRef<DialogbodyComponent>, public toastservice: ToastrService) { 
     
   }
+
+  
 
   ngOnInit() {
     this.http.get("http://localhost:5001/").subscribe(data=>{
@@ -97,15 +105,26 @@ selfol(data){
     this.WarnFlag = false;
     this.CustFlag = false;
     this.logfile = data.Name;
+    //this.toastservice.info('AnyLogger','File added',{progressBar: true});
     this.alert.nativeElement.classList.add('show');
     setTimeout(()=>{
       this.closeAlert();
-      }, 10000);
+      }, 5000);
     clearInterval(this.myInterval);
     this.myInterval = setInterval(()=>{
       this.http.get("http://localhost:5000/?path="+data.Path+"/"+data.Name+"",{responseType:"text"})
       .subscribe(data=>{
         this.Content = data;
+        if (this.enableerr){
+          this.Content = this.Content.split(/Error|error|errors|Errors/).join('<<<===========================###ERROR###===========================>>> ');
+        }
+        if (this.enablewarn){
+          this.Content = this.Content.split(/Warning|warning|Warnings|warnings/).join('<<<===========================###WARNING###===========================>>> ');
+        }
+        if (this.enablecust){
+          var cust = '<<<==========================='+'###'+this.Custinput+'###'+'===========================>>>';
+          this.Content = this.Content.split(this.Custinput).join(cust);
+        }
         setTimeout(()=>{
         if (this.scrollflag){
           textarea.scrollTop = textarea.scrollHeight;
@@ -121,12 +140,11 @@ selfol(data){
       if (this.Content.indexOf(this.Custinput) >= 0){
         this.CustFlag = true;
       }
-    
       this.ErrCount = (this.Content.match(/Error|error|errors|Errors/g) || []).length;
       this.WarnCount = (this.Content.match(/Warning|warning|Warnings|warnings/g) || []).length;
       var ci = new RegExp(this.Custinput,'g');
       this.CustCount = (this.Content.match(ci) || []).length;
-      this.Content = this.Content.split(/Error|error|errors|Errors/).join('Error<<<=========================== Here It Is! ');
+     // this.Content = this.Content.split(/Error|error|errors|Errors/).join('<<<===========================###ERROR###===========================>>> ');
     })
     console.log(textarea.scrollTop)
     console.log(textarea.offsetHeight)
@@ -143,7 +161,7 @@ selfol(data){
     setTimeout(()=>{
       this.closeAlertfail();
       }, 5000);
-  }else if(this.WarnFlag){
+  }if(this.WarnFlag){
     this.alertwarn.nativeElement.classList.add('show');
     setTimeout(()=>{
       this.closeAlertwarn();
@@ -192,6 +210,7 @@ closeAlertnodir() {
 
 onKeydown(event) {
   if (event.key === "Enter") {
+    this.dir = [];
     this.http.get("http://localhost:5001/?init="+event.target.value).subscribe(data=>{
       if (data[0].Errormsg){
         this.errmsg = data[0].Errormsg;
@@ -222,5 +241,12 @@ dialogRef.afterClosed().subscribe(result => {
   }
 });
 }
+
+select(){
+  var url = document.getElementById("pathbox") as HTMLInputElement;
+  url.select();
+}
+
+
 
 }

@@ -12,30 +12,14 @@
   <div class="container-fluid">
   <div class="row justify-content-md-left"> 
   <div class="col-3 fildir">
-    <!--  <mdb-badge id="pathlabel"  info="true">{{path}}</mdb-badge> -->
-    
- <!--     <div class="upbtn">
-          <button type="button" mdbBtn color="info" mdbWavesEffect (click)="up()"><img src="./assets/images/back.png"/></button>
-      </div>
-      -->
-  <!--    <mdb-card style="overflow-y: scroll; height:400px;">
-          <div class="list-group list-group-flush">
-              <div *ngFor="let file of files" (click)="selfol(file)" class="list-group-item pointer">
-                      <div>
-                        <img [hidden]="imgflag" [src]="file.IsDirectory==true ? './assets/images/folder.png' : './assets/images/file.png'"/>
-                        {{file.Name}}
-                      </div>
-              </div>
-            </div>
-      </mdb-card>
-  -->
+
   <table mdbTable mdbTableScroll  maxHeight="500" bordered="true"  striped="true"  hover="true"  small="true" class="table-scroll">
-      <thead class="black white-text">
+      <caption>Showing {{this.files.length}} Items</caption>
+      <thead>
           <tr>
             <th scope="col">
                 <button class="upbtn" (click)="up()"><img src="./assets/images/back.png"/></button>
-                <input type="text" [(ngModel)]="this.path" (keydown)="onKeydown($event)" class="pathtext"> 
-        <!--        {{(path.length>35)? (path | slice:0:35)+'...':(path)}}  -->
+                <input type="text" [(ngModel)]="this.path" (keydown)="onKeydown($event)" class="pathtext" id="pathbox" (click)="select()"> 
             </th>
           </tr>
         </thead>
@@ -52,7 +36,7 @@
         <button type="button" class="close" aria-label="Close" (click)="closeAlert()">
           <span aria-hidden="true">&times;</span>
         </button>
-        <strong>File <b>{{logfile}}</b> added to the Logger!</strong>
+        <strong>File <b>"{{logfile}}"</b> added to the Logger!</strong>
       </div>
       <div #alertfail class="alert alert-danger alert-dismissible fade show" role="alert">
           <button type="button" class="close" aria-label="Close" (click)="closeAlertfail()">
@@ -68,12 +52,11 @@
           </div>
   </div>
   <div class="col-8"> 
-  <div class="form-group purple-border" #content>
-    <textarea class="form-control" id="exampleFormControlTextarea4" rows="26" placeholder="Your Logs Flow Here!" readonly>{{Content}}</textarea>
-  </div>
+ <div class="form-group purple-border" #content> 
+    <textarea  id="exampleFormControlTextarea4" rows="26" placeholder="Your Logs Flow Here!" readonly [(ngModel)]="Content" [class]="ErrCount > 0 ? 'redclass' : 'blackclass'"></textarea>
+ </div> 
   <div  id="funcbtns" >
-      <!-- <button type="button" mdbBtn color="primary" mdbTooltip="Upload Any Log file to Watch" placement="top" mdbWavesEffect>Upload Log File</button> -->
-       <button type="button" mdbBtn color="danger" mdbTooltip="Clears the Logs & Resets all the counters" placement="top" mdbWavesEffect (click)="basicModal.show()">Clear Log</button>
+       <button type="button" mdbBtn color="danger" mdbTooltip="Clears the Logs & Resets all the counters" placement="top" mdbWavesEffect (click)="basicModal.show()">Clear Log</button> 
        <button type="button" mdbBtn color="primary" mdbTooltip="Set a Custom String for its Count" placement="top" mdbWavesEffect (click)="cusfilfun()">Custom Filter</button>
    </div>
      <!--Counter Components-->
@@ -82,31 +65,40 @@
          <div>
            <h4><mdb-badge color="red">Errors</mdb-badge></h4>
          </div>
-         <div>
+         <div class="countere">
            <ngx-counter size="medium" theme="red" [(ngModel)]="ErrCount" limit=0>></ngx-counter>
          </div>
+         <div class="container switchere">
+            <ui-switch size="small" color="red" [(ngModel)]="enableerr"></ui-switch>
+          </div>
        </div>
        <div id="warn" class="container-fluid">
            <div>
              <h4><mdb-badge color="orange">Warnings</mdb-badge></h4>
            </div>
-           <div>
+           <div class="counterw">
              <ngx-counter size="medium" theme="gold" bgcolor="#F5F5DC" [(ngModel)]="WarnCount" limit=0></ngx-counter>
            </div>
+           <div class="container switcherw">
+              <ui-switch (change)="warnswitch($event)" size="small" color="yellow" [(ngModel)]="enablewarn"></ui-switch>
+            </div>
        </div>
        <div id="cus" class="container-fluid">
            <div>
              <h4><mdb-badge color="blue">{{Custom}}</mdb-badge></h4>
            </div>
-           <div>
+           <div class="counterc">
              <ngx-counter size="medium" theme="blue" [(ngModel)]="CustCount" limit=0></ngx-counter>
            </div>
+           <div class="container switcherc">
+              <ui-switch (change)="custswitch($event)" size="small" color="blue" [(ngModel)]="enablecust"></ui-switch>
+            </div>
        </div>
      </div>
 </div>
 </div>
 </div>
-<!--Modal-Clear-Log-->
+<!--Modal-Clear-Log -->
 <div mdbModal #basicModal="mdbModal" class="modal fade top" tabindex="-1" role="dialog" aria-labelledby="myBasicModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-notify modal-danger" role="document">
     <div class="modal-content">
@@ -127,18 +119,7 @@
   </div>
 </div>
 <!--Modal-Clear-Log-->
-  <!--Counter Components-->
+<!-- Button trigger modal -->
+
 </body>
-
-<!-- Footer 
-  <footer class="page-footer font-small indigo darken-4">
- 
-  <div class="footer-copyright text-center py-3" style="color:#F8B11E">© 2019 Copyright : 
-    <a href="https://mdbootstrap.com/education/angular/" style="color:#F8B11E"> GPC - NAPA - RPM - AnyLogger!</a>
-  </div>
-  
-
-</footer> 
--->
-<!-- Footer -->
 

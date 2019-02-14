@@ -35,11 +35,12 @@ app.use(express.static(__dirname)); //module directory
 app.get('/', function(req, res) {
 
   var currentDir = dir;
+  var query = req.query.path || '';
   if (req.query.init){
   var currentDir = req.query.init;
   dir = req.query.init;
   }
-  var query = req.query.path || '';
+  console.log(query)
   if (query) currentDir = path.join(currentDir,query);
   console.log(currentDir);
   fs.readdir(currentDir, function (err, files) {
@@ -47,6 +48,7 @@ app.get('/', function(req, res) {
          console.log(err);
          var errmsg = [{Errormsg: "Directory "+currentDir+" not Found!... Kindly Check if the Directory is Valid!"}];
          res.send(errmsg);
+         query = null;
          dir = "/ei_dataload/"
          return;
        }

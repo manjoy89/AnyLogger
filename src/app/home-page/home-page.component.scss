@@ -14,18 +14,15 @@
 #exampleFormControlTextarea4{
     margin-left: auto;
     margin-right: auto;
-   // margin-top: 40px;
     font-size: 13px;
-    color: black;
-    width: 115%;
+   // color: black;
+    width: 113%;
     background-color: white;
     
 }
 
 #funcbtns {
-//float: right; 
 margin-left: 400px;
-//margin-right:50px;
 padding-top: 20px;
 }
 
@@ -33,6 +30,19 @@ padding-top: 20px;
    margin-left: 100px;
    padding-top: 30px;
 }
+
+.switchere{
+   margin-left: 2px;
+    padding-top: 8px;
+ }
+ .switcherw{
+    margin-left: 13px;
+     padding-top: 8px;
+  }
+  .switcherc{
+    margin-left: 9px;
+     padding-top: 8px;
+  }
 
 .navbar-brand {
     font-weight: bold;
@@ -72,10 +82,6 @@ padding-top: 20px;
 #pathlabel{
     width: 370px;
     height: 50px;
-  //  outline-style: solid;
-   // outline-width: 1px;
- //   outline-color: grey;
- //   background-color: #F0FFFF;
     font-weight: bold;
     font-size: 15px;
     word-wrap: break-word;
@@ -84,7 +90,6 @@ padding-top: 20px;
 
 .pointer{
     cursor: pointer;
-  //  background-color: #F0FFFF;
 }
 
 .upbtn{
@@ -133,4 +138,27 @@ padding-top: 20px;
 
 .mark-style{
     background-color: #00BFFF;
+}
+
+.countere{
+    margin-left: 8px;
+}
+.counterw{
+    margin-left: 20px;
+}
+.counterc{
+    margin-left: 15px;
+}
+ 
+thead{
+    font-weight: bold;
+    background-color: #0b135d;
+}
+
+.redclass{
+    color: red;
+}
+
+.blackclass{
+    color: black;
 }

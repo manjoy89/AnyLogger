@@ -32,6 +32,7 @@
               "/Users/pctr487330/Desktop/AnyLogger/node_modules/angular-bootstrap-md/scss/bootstrap/bootstrap.scss",
               "/Users/pctr487330/Desktop/AnyLogger/node_modules/angular-bootstrap-md/scss/mdb-free.scss",
               "src/styles.scss"
+              
             ],
             "scripts": [
               "/Users/pctr487330/Desktop/AnyLogger/node_modules/chart.js/dist/Chart.js"
@@ -91,8 +92,7 @@
             "styles": [
               "src/styles.scss"
             ],
-            "scripts": [
-            ],
+            "scripts": [],
             "assets": [
               "src/favicon.ico",
               "src/assets"

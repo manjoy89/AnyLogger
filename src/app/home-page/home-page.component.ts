@@ -116,10 +116,10 @@ selfol(data){
       .subscribe(data=>{
         this.Content = data;
         if (this.enableerr){
-          this.Content = this.Content.split(/Error|error|errors|Errors/).join('<<<===========================###ERROR###===========================>>> ');
+          this.Content = this.Content.split(/Error|error|errors|Errors|ERROR|ERRORS/).join('<<<===========================###ERROR###===========================>>> ');
         }
         if (this.enablewarn){
-          this.Content = this.Content.split(/Warning|warning|Warnings|warnings/).join('<<<===========================###WARNING###===========================>>> ');
+          this.Content = this.Content.split(/Warning|warning|Warnings|warnings|WARNING|WARNINGS/).join('<<<===========================###WARNING###===========================>>> ');
         }
         if (this.enablecust){
           var cust = '<<<==========================='+'###'+this.Custinput+'###'+'===========================>>>';
@@ -140,8 +140,8 @@ selfol(data){
       if (this.Content.indexOf(this.Custinput) >= 0){
         this.CustFlag = true;
       }
-      this.ErrCount = (this.Content.match(/Error|error|errors|Errors/g) || []).length;
-      this.WarnCount = (this.Content.match(/Warning|warning|Warnings|warnings/g) || []).length;
+      this.ErrCount = (this.Content.match(/Error|error|errors|Errors|ERROR|ERRORS/g) || []).length;
+      this.WarnCount = (this.Content.match(/Warning|warning|Warnings|warnings|WARNING|WARNINGS/g) || []).length;
       var ci = new RegExp(this.Custinput,'g');
       this.CustCount = (this.Content.match(ci) || []).length;
      // this.Content = this.Content.split(/Error|error|errors|Errors/).join('<<<===========================###ERROR###===========================>>> ');
@@ -174,8 +174,6 @@ selfol(data){
   this.ErrFlag = false;
   this.WarnFlag = false;
   this.CustFlag = false;
-  
-  
   }
   
 }

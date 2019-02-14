@@ -14,9 +14,7 @@ export class EnvironmentlistComponent implements OnInit {
   private _jsonURL = 'assets/rpmjson.json';
   constructor(private http: HttpClient) {
     this.getJSON().subscribe(datas => {
-     // console.log(datas);
       this.items.push(datas);
-      console.log(this.items[0].CIQ2[0].rpms)
      });
    }
 

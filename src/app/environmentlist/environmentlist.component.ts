@@ -15,6 +15,7 @@ export class EnvironmentlistComponent implements OnInit {
   constructor(private http: HttpClient) {
     this.getJSON().subscribe(datas => {
       this.items.push(datas);
+      console.log(this.items[0].CIQ2)
      });
    }
 

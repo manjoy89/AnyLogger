@@ -8,13 +8,13 @@
       
   <mdb-card *ngFor="let item of this.items[0].CIQ2" class="envs">
       <h2>{{item.env}}</h2>
-      <hr class="hrclass">
       <mdb-card-body>
-        <mdb-card-title >
-          <strong>NAME:</strong> {{item.name}}<br>
-          <strong>IP:</strong> {{item.ip}}<br>
-          <strong>ENV:</strong> {{item.env}}<br>
-          <strong>LAST UPDATED:</strong> {{item.lastUpdated}}
+          <hr class="hrclass">
+        <mdb-card-title class="align-items-center d-flex justify-content-center">
+          |&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>NAME:</strong>&nbsp;{{item.name}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          <strong>IP:</strong> &nbsp;{{item.ip}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          <strong>ENV:</strong> &nbsp;{{item.env}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          <strong>LAST UPDATED:</strong> &nbsp;{{item.lastUpdated}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|
         </mdb-card-title>
         <hr>
         <table mdbTable mdbTableScroll  maxHeight="500" bordered="true"  striped="true"  hover="true"  small="true" class="table-scroll">

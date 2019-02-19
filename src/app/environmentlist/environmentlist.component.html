@@ -21,14 +21,11 @@
             <caption>Showing {{item.rpms.length}} Items</caption>
             <thead align="center">
                 <tr>
-                  <th scope="col">NAME</th>
-                  <th scope="col">VERSION</th>
-                  <th scope="col">RELEASE</th>
-                  <th scope="col">INSTALLED</th>
+                    <th *ngFor="let head of headElements; let i = index" scope="col">{{head}}
                 </tr>
               </thead>
             <tbody align="center">
-              <tr *ngFor="let rpms of item.rpms">
+             <tr *ngFor="let rpms of item.rpms; let i = index">
                 <td>{{rpms.name}}</td>
                 <td>{{rpms.version}}</td>
                 <td>{{rpms.release}}</td>

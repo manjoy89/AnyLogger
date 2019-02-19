@@ -6,7 +6,6 @@ var cors = require('cors');
 app.use(cors());
 app.get('/', (req, res) => {
    var readfl = req.query.path;
-   console.log(readfl)
     fs.readFile(readfl, (err, data) => {
         if (err) throw err;
         res.send(data);

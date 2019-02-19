@@ -82,10 +82,8 @@ selfol(data){
   if ((data.IsDirectory) || (data.IsDirectory == undefined)){
     if(data.IsDirectory !== undefined){
     this.dir.push(data.Name)
-    console.log(this.dir);
     var str = this.dir.join("/");
     this.http.get("http://localhost:5001/?path="+str+"").subscribe(data=>{
-      console.log(str);
     this.files = data;
     if(data[0].Name == "empty"){
       this.files = [];
@@ -144,16 +142,11 @@ selfol(data){
       this.WarnCount = (this.Content.match(/Warning|warning|Warnings|warnings|WARNING|WARNINGS/g) || []).length;
       var ci = new RegExp(this.Custinput,'g');
       this.CustCount = (this.Content.match(ci) || []).length;
-     // this.Content = this.Content.split(/Error|error|errors|Errors/).join('<<<===========================###ERROR###===========================>>> ');
     })
-    console.log(textarea.scrollTop)
-    console.log(textarea.offsetHeight)
-    console.log(textarea.scrollHeight)
-    
+
     if(textarea.scrollHeight - textarea.scrollTop < 600){
        textarea.scrollTop = textarea.scrollHeight;
     }
-    console.log("err flag"+this.ErrFlag)
   }, 500);
   setTimeout(()=>{
   if (this.ErrFlag){
@@ -180,7 +173,6 @@ selfol(data){
 
 up(){
   this.dir.splice(-1,1)
-  console.log(this.dir);
   var str1 = this.dir.join("/");
   this.http.get("http://localhost:5001/?path="+str1+"")
   .subscribe(data=>{

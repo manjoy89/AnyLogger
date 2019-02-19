@@ -28,14 +28,13 @@
               "src/assets/images"
             ],
             "styles": [
-              "/Users/pctr487330/Desktop/AnyLogger/node_modules/font-awesome/scss/font-awesome.scss",
-              "/Users/pctr487330/Desktop/AnyLogger/node_modules/angular-bootstrap-md/scss/bootstrap/bootstrap.scss",
-              "/Users/pctr487330/Desktop/AnyLogger/node_modules/angular-bootstrap-md/scss/mdb-free.scss",
+              "node_modules/font-awesome/scss/font-awesome.scss",
+              "node_modules/angular-bootstrap-md/scss/bootstrap/bootstrap.scss",
+              "node_modules/angular-bootstrap-md/scss/mdb-free.scss",
               "src/styles.scss"
               
             ],
             "scripts": [
-              "/Users/pctr487330/Desktop/AnyLogger/node_modules/chart.js/dist/Chart.js"
             ]
           },
           "configurations": {
